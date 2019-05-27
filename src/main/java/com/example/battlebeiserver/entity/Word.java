@@ -11,7 +11,9 @@ import lombok.Data;
  **/
 @Data
 public class Word {
+    /**
+     * id word总表的id
+     */
     private Long id;
-    private Long wordId;
     private String word;
 }

@@ -1,5 +1,6 @@
 package com.example.battlebeiserver.dao;
 
+import com.example.battlebeiserver.entity.UserWord;
 import com.example.battlebeiserver.entity.WordPlan;
 import com.example.battlebeiserver.mapper.WordPlanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class WordPlanDao {
     private WordPlanMapper wordPlanMapper;
 
 
+    /**
+     * 获得用户当前计划
+     * @param openId
+     * @return
+     */
     public WordPlan getNowWordPlan(String openId){
         return wordPlanMapper.getNowWordPlan(openId,true);
     }
@@ -36,6 +42,7 @@ public class WordPlanDao {
      * @param wordPlan
      * @return
      */
+    @Transactional
     public Long addWordPlan(WordPlan wordPlan){
         wordPlanMapper.setWordPlanPresent(wordPlan.getOpenId(),Boolean.TRUE,Boolean.FALSE);
         return wordPlanMapper.addWordPlan(wordPlan);
@@ -60,5 +67,14 @@ public class WordPlanDao {
         wordPlanMapper.setWordPlanPresent(wordPlan.getOpenId(),Boolean.TRUE,Boolean.FALSE);
         return wordPlanMapper.setNowWordPlan(wordPlan);
 
+    }
+
+    /**
+     * 用户当前计划进度++
+     * @param userWord
+     * @return
+     */
+    public Long setNowWordPlanPace(UserWord userWord){
+        return wordPlanMapper.setNowWordPlanPace(userWord);
     }
 }

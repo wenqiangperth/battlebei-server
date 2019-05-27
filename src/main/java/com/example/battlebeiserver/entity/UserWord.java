@@ -2,6 +2,8 @@ package com.example.battlebeiserver.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @author perth
  * @ClassName UserWord
@@ -10,4 +12,11 @@ import lombok.Data;
  **/
 @Data
 public class UserWord {
+    private String openId;
+    /**
+     * wordId,总表的id
+     */
+    private Long wordId;
+    private int weight;
+    private Date date;
 }

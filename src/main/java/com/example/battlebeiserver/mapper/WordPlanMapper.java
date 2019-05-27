@@ -1,6 +1,7 @@
 package com.example.battlebeiserver.mapper;
 
 
+import com.example.battlebeiserver.entity.UserWord;
 import com.example.battlebeiserver.entity.WordPlan;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -75,5 +76,13 @@ public interface WordPlanMapper {
      */
     @Insert("insert into user_word_plan(open_id,category,daily_num,pace,present_flag,start_date,end_date) values (#{openId},#{category},#{dailyNum},#{pace},#{presentFlag},#{startDate},#{endDate})")
     public Long addWordPlan(WordPlan wordPlan);
+
+    /**
+     * 用户当前计划进度++
+     * @param userWord
+     * @return
+     */
+    @Update("update user_word_plan set pace=pace+1 where open_id=#{openId} and present_flag=true")
+    public Long setNowWordPlanPace(UserWord userWord);
 
 }
