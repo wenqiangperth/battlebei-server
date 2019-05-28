@@ -1,9 +1,12 @@
 package com.example.battlebeiserver.dao;
 
 import com.example.battlebeiserver.entity.UserWord;
+import com.example.battlebeiserver.entity.Word;
 import com.example.battlebeiserver.mapper.WordCollectionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
 
 /**
  * @author perth
@@ -32,5 +35,14 @@ public class UserWordCollectionDao {
      */
     public Long deleteWordCollectionByOpenIdAndWordId(UserWord userWord){
         return wordCollectionMapper.deleteWordCollectionByOpenIdAndWordId(userWord);
+    }
+
+    /**
+     * 获得用户生词本
+     * @param openId
+     * @return
+     */
+    public ArrayList<Word> getUserWordCollection(String openId){
+        return wordCollectionMapper.getUserWordCollection(openId);
     }
 }

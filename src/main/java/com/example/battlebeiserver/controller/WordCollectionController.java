@@ -1,12 +1,12 @@
 package com.example.battlebeiserver.controller;
 
 import com.example.battlebeiserver.entity.UserWord;
+import com.example.battlebeiserver.entity.Word;
 import com.example.battlebeiserver.service.WordCollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 /**
  * @author perth
@@ -38,5 +38,15 @@ public class WordCollectionController {
     @DeleteMapping(value = "/wordcollection")
     public Long deleteUserWordCollection(@RequestBody UserWord userWord){
         return wordCollectionService.deleteWordCollectionByOpenIdAndWordId(userWord);
+    }
+
+    /**
+     * 获得用户生词本
+     * @param openId
+     * @return
+     */
+    @GetMapping(value = "/userwordcollection")
+    public ArrayList<Word>getUserWordCollection(@RequestParam(value = "openId")String openId){
+        return wordCollectionService.getUserWordCollection(openId);
     }
 }

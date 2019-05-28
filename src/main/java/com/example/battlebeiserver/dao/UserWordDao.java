@@ -85,4 +85,13 @@ public class UserWordDao {
     public ArrayList<Word>getReviewWord(String openId){
         return userWordMapper.getReviewWord(openId, Constant.REVIEWNUM);
     }
+
+    /**
+     * 获得用户在user_word表的所有词汇量
+     * @param openId
+     * @return
+     */
+    public Long getUserWordNum(String openId){
+        return userWordMapper.getUserWordNum(openId);
+    }
 }

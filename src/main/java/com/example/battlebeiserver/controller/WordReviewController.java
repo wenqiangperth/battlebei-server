@@ -21,7 +21,7 @@ public class WordReviewController {
 
 
     /**
-     * 获取用户复习的前number个词汇
+     * 获取用户复习的前number个词汇,按照时间，时间越久越先复习
      * @param openId
      * @return
      */
@@ -41,7 +41,7 @@ public class WordReviewController {
     }
 
     /**
-     * 处理复习过程正确词汇，weight--
+     * 处理复习过程错误词汇，weight--
      * @param userWord
      * @return
      */

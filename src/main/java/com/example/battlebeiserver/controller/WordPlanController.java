@@ -1,5 +1,6 @@
 package com.example.battlebeiserver.controller;
 
+import com.example.battlebeiserver.entity.UserStudyStatus;
 import com.example.battlebeiserver.entity.WordPlan;
 import com.example.battlebeiserver.service.WordPlanService;
 import com.example.battlebeiserver.util.Constant;
@@ -28,13 +29,31 @@ public class WordPlanController {
      */
     @PostMapping(value = "/wordplan")
     public Long setWordPlan(@RequestBody WordPlan wordPlan){
-        System.out.println(wordPlan.toString());
         return wordPlanService.setWordPlan(wordPlan);
+    }
+
+    /**
+     * 获得用户当前计划
+     * @param openId
+     * @return
+     */
+    @GetMapping(value = "/wordplan")
+    public WordPlan getWordPlan(@RequestParam(value = "openId")String openId){
+        return wordPlanService.getNowWordPlan(openId);
+    }
+
+    /**
+     * 获得用户学习情况
+     * @param openId
+     * @return
+     */
+    @GetMapping(value = "/UserStudyStatus")
+    public UserStudyStatus getUserStudyStatus(@RequestParam(value = "openId")String openId){
+        return wordPlanService.getUserStudyStatus(openId);
     }
 
     @PostMapping(value = "/try")
     public void test(@RequestBody WordPlan wordPlan){
         System.out.println(wordPlan.toString());
-
     }
 }

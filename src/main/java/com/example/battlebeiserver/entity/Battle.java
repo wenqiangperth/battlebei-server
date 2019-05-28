@@ -14,4 +14,5 @@ public class Battle {
     private String startOpenId;
     private String receiveOpenId;
     private Long grade;
+    private int rightNum;
 }

@@ -1,12 +1,14 @@
 package com.example.battlebeiserver.service;
 
 import com.example.battlebeiserver.dao.*;
+import com.example.battlebeiserver.entity.UserStatus;
 import com.example.battlebeiserver.entity.UserWord;
 import com.example.battlebeiserver.entity.Word;
 import com.example.battlebeiserver.entity.WordPlan;
 import com.example.battlebeiserver.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,6 +35,8 @@ public class WordService {
     private WordDao wordDao;
     @Autowired
     private UserWordDao userWordDao;
+    @Autowired
+    private UserStatusDao userStatusDao;
 
 
     /**
@@ -63,8 +67,13 @@ public class WordService {
      * @param userWord
      * @return
      */
+    @Transactional
     public Long handleStudyKnownWord(UserWord userWord){
-        return wordPlanDao.setNowWordPlanPace(userWord);
+        UserStatus userStatus=new UserStatus();
+        userStatus.setOpenId(userWord.getOpenId());
+        Long temp=userStatusDao.addUserStatusStudyNum(userStatus);
+        Long te=wordPlanDao.setNowWordPlanPace(userWord);
+        return te*temp;
     }
 
     /**
@@ -72,10 +81,15 @@ public class WordService {
      * @param userWord
      * @return
      */
+    @Transactional
     public Long handleStudyUnknownWord(UserWord userWord){
+        UserStatus userStatus=new UserStatus();
+        userStatus.setOpenId(userWord.getOpenId());
+        Long temp=userStatusDao.addUserStatusStudyNum(userStatus);
         userWord.setWeight(Constant.SMALLWEIGTH);
         userWord.setDate(new Date());
-        return userWordDao.handleUnknownWord(userWord);
+        Long te=userWordDao.handleUnknownWord(userWord);
+        return te*temp;
     }
 
     /**

@@ -1,6 +1,8 @@
 package com.example.battlebeiserver.service;
 
+import com.example.battlebeiserver.dao.UserStatusDao;
 import com.example.battlebeiserver.dao.UserWordDao;
+import com.example.battlebeiserver.entity.UserStatus;
 import com.example.battlebeiserver.entity.UserWord;
 import com.example.battlebeiserver.entity.Word;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class WordReviewService {
     private UserWordDao userWordDao;
     @Autowired
     private WordTestService wordTestService;
+    @Autowired
+    private UserStatusDao userStatusDao;
 
     /**
      * 获取用户复习的前number个词汇
@@ -36,7 +40,11 @@ public class WordReviewService {
      * @return
      */
     public Long setUserReviewWordRight(UserWord userWord){
-        return wordTestService.improveUserWordWeight(userWord);
+        UserStatus userStatus=new UserStatus();
+        userStatus.setOpenId(userWord.getOpenId());
+        Long temp=userStatusDao.addUserStatusReviewNum(userStatus);
+        Long te=wordTestService.improveUserWordWeight(userWord);
+        return te*temp;
     }
 
     /**
@@ -45,6 +53,10 @@ public class WordReviewService {
      * @return
      */
     public Long setUserReviewWordWrong(UserWord userWord){
-        return wordTestService.reduceUserWordWeight(userWord);
+        UserStatus userStatus=new UserStatus();
+        userStatus.setOpenId(userWord.getOpenId());
+        Long temp=userStatusDao.addUserStatusReviewNum(userStatus);
+        Long te=wordTestService.reduceUserWordWeight(userWord);
+        return te*temp;
     }
 }

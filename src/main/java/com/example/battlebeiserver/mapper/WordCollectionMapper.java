@@ -1,10 +1,11 @@
 package com.example.battlebeiserver.mapper;
 
 import com.example.battlebeiserver.entity.UserWord;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
+import com.example.battlebeiserver.entity.Word;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
 
 /**
  * @author perth
@@ -31,4 +32,19 @@ public interface WordCollectionMapper {
      */
     @Delete("delete from user_word_collection where open_id=#{openId} and word_id=#{wordId}")
     public Long deleteWordCollectionByOpenIdAndWordId(UserWord userWord);
+
+    /**
+     * 获得用户生词本
+     * @param openId
+     * @return
+     */
+    @Select("select w.id,w.word from word w,user_word_collection uwc where uwc.open_id=#{openId} and uwc.word_id=w.id")
+    public ArrayList<Word>getUserWordCollection(@Param(value = "openId")String openId);
+
+
+    @Select("select w.id,w.word from word w,user_word_collection uwc where uwc.open_id=#{openId} " +
+            "and uwc.word_id=w.id and uwc.id>=(select floor(rand()*((select max(id) from user_word_collection)" +
+            "-(select min(id) from user_word_collection))+(select min(id) from user_word_collection)))" +
+            "order by uwc.id limit #{battleNum}")
+    public ArrayList<Word>getUserWordCollectionForBattle(@Param(value = "openId")String openId,@Param(value = "battleNum")Long battleNum);
 }

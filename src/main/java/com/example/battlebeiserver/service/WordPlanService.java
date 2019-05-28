@@ -1,6 +1,9 @@
 package com.example.battlebeiserver.service;
 
+import com.example.battlebeiserver.dao.UserStatusDao;
+import com.example.battlebeiserver.dao.UserWordDao;
 import com.example.battlebeiserver.dao.WordPlanDao;
+import com.example.battlebeiserver.entity.UserStudyStatus;
 import com.example.battlebeiserver.entity.WordPlan;
 import com.example.battlebeiserver.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,10 @@ public class WordPlanService {
     private WordPlanDao wordPlanDao;
     @Autowired
     private WordService wordService;
+    @Autowired
+    private UserStatusDao userStatusDao;
+    @Autowired
+    private UserWordDao userWordDao;
 
 
     /**
@@ -49,6 +56,30 @@ public class WordPlanService {
     }
 
     /**
+     * 获得用户当前计划
+     * @param openId
+     * @return
+     */
+    public WordPlan getNowWordPlan(String openId){
+        return wordPlanDao.getNowWordPlan(openId);
+    }
+
+    /**
+     * 获得用户学习情况
+     * @param openId
+     * @return
+     */
+    public UserStudyStatus getUserStudyStatus(String openId){
+        UserStudyStatus userStudyStatus=userStatusDao.getUserTodayStudyNumAndReviewNum(openId);
+        WordPlan wordPlan=wordPlanDao.getNowWordPlan(openId);
+        userStudyStatus.setDailyNum(wordPlan.getDailyNum().intValue());
+        userStudyStatus.setOpenId(openId);
+        userStudyStatus.setWordLeftDays(differentDayMillisecond(new Date(),wordPlan.getEndDate()));
+        userStudyStatus.setReviewNum(userWordDao.getUserWordNum(openId).intValue());
+        return userStudyStatus;
+    }
+
+    /**
      * 新增单词计划
      * @param wordPlan
      * @return
@@ -57,7 +88,7 @@ public class WordPlanService {
         if(wordPlan.getDailyNum()==null){
             wordPlan.setDailyNum(Constant.DAILYNUM);
         }
-        wordPlan.setPace(Constant.CET4START);
+        wordPlan.setPace(Constant.PACESTART);
         Date date=new Date();
         wordPlan.setStartDate(date);
         Long num=wordService.getRemaining(wordPlan);
@@ -110,5 +141,17 @@ public class WordPlanService {
         d = ca.getTime();
         System.out.println(d);
         return d;
+    }
+
+    /**
+     * 计算日期间相差天数
+     * @param date1
+     * @param date2
+     * @return
+     */
+    public  static int differentDayMillisecond (Date date1,Date date2)
+    {
+        int day = (int)((date2.getTime()-date1.getTime())/(3600*1000*24));
+        return day;
     }
 }

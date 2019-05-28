@@ -64,4 +64,12 @@ public interface UserWordMapper {
     @Select("select w.id,w.word from user_word uw,word w where uw.open_id=#{openId} and uw.word_id=w.id order by uw.date limit #{number}")
     public ArrayList<Word>getReviewWord(@Param(value = "openId")String openId,@Param(value = "number")Long number);
 
+    /**
+     * 获得用户在user_word表的所有词汇量
+     * @param openId
+     * @return
+     */
+    @Select("select count(word_id) from user_word where open_id=#{open_id}")
+    public Long getUserWordNum(@Param(value = "openId")String openId);
+
 }

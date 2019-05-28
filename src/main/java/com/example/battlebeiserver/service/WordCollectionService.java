@@ -2,8 +2,11 @@ package com.example.battlebeiserver.service;
 
 import com.example.battlebeiserver.dao.UserWordCollectionDao;
 import com.example.battlebeiserver.entity.UserWord;
+import com.example.battlebeiserver.entity.Word;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 /**
  * @author perth
@@ -32,5 +35,14 @@ public class WordCollectionService {
      */
     public Long deleteWordCollectionByOpenIdAndWordId(UserWord userWord){
         return userWordCollectionDao.deleteWordCollectionByOpenIdAndWordId(userWord);
+    }
+
+    /**
+     * 获得用户生词本
+     * @param openId
+     * @return
+     */
+    public ArrayList<Word> getUserWordCollection(String openId){
+        return userWordCollectionDao.getUserWordCollection(openId);
     }
 }
