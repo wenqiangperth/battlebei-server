@@ -5,6 +5,7 @@ import com.example.battlebeiserver.entity.UserStudyStatus;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -55,5 +56,15 @@ public interface UserStatusMapper {
     })
     public UserStudyStatus getUserTodayStudyNumAndReviewNum(@Param(value = "openId")String openId, @Param(value = "date")Date date);
 
+    /**
+     * 获得所有用户总的学习单词量
+     * @return
+     */
+    @Select("select open_id,sum(study_num) study_num from user_status group by open_id order by sum(study_num) desc")
+    @Results(value = {
+            @Result(property = "openId",column = "open_id"),
+            @Result(property = "studyNum",column = "study_num")
+    })
+    public ArrayList<UserStatus> getUserStudyNum();
 
 }

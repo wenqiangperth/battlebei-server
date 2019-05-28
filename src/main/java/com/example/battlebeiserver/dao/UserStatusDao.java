@@ -6,6 +6,7 @@ import com.example.battlebeiserver.mapper.UserStatusMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -60,5 +61,13 @@ public class UserStatusDao {
      */
     public UserStudyStatus getUserTodayStudyNumAndReviewNum(String openId){
         return userStatusMapper.getUserTodayStudyNumAndReviewNum(openId,new Date());
+    }
+
+    /**
+     * 获得所有用户总的学习单词量
+     * @return
+     */
+    public ArrayList<UserStatus> getUserStudyNum(){
+        return userStatusMapper.getUserStudyNum();
     }
 }

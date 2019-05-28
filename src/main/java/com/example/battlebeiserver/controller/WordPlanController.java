@@ -43,7 +43,7 @@ public class WordPlanController {
     }
 
     /**
-     * 获得用户学习情况
+     * 获得用户学习情况 首页那几个
      * @param openId
      * @return
      */

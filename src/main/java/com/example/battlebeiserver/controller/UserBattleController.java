@@ -1,6 +1,8 @@
 package com.example.battlebeiserver.controller;
 
 import com.example.battlebeiserver.entity.Battle;
+import com.example.battlebeiserver.entity.BattleGrade;
+import com.example.battlebeiserver.entity.UserStatus;
 import com.example.battlebeiserver.entity.Word;
 import com.example.battlebeiserver.service.UserBattleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +32,31 @@ public class UserBattleController {
     }
 
     /**
-     * battle打分，包含battle的id,rightNum
+     * battle打分，包含battle的id,rightNum,startOpenId
      * @param battle
      * @return
      */
     @PutMapping(value = "/battlegrade")
     public Long setUserBattleGrade(@RequestBody Battle battle){
         return userBattleService.setUserBattleGrade(battle);
+    }
+
+    /**
+     * 获得所有用户的battle成绩,降序
+     * @return
+     */
+    @GetMapping(value = "/userbattlegrade")
+    public ArrayList<BattleGrade>getUserBattleGrades(){
+        return userBattleService.getUserBattleGrades();
+    }
+
+    /**
+     * 获得所有用户总的学习单词量,降序
+     * @return
+     */
+    @GetMapping(value = "/userstudynumber")
+    public ArrayList<UserStatus>getUserStudyNum(){
+        return userBattleService.getUserStudyNum();
     }
 
     /**
