@@ -22,7 +22,7 @@ public class UserBattleController {
     private UserBattleService userBattleService;
 
     /**
-     * 增加用户新的battle,返回该battle的id
+     * 增加用户新的battle,返回该battle的id,参数startOpenId，receiveOpenId
      * @param battle
      * @return
      */
@@ -32,7 +32,7 @@ public class UserBattleController {
     }
 
     /**
-     * battle打分，包含battle的id,rightNum,startOpenId
+     * battle打分，参数为该battle的id,rightNum,startOpenId
      * @param battle
      * @return
      */
@@ -60,7 +60,7 @@ public class UserBattleController {
     }
 
     /**
-     * 获得battle所需词汇
+     * 获得battle所需词汇，参数openId
      * @param openId
      * @return
      */

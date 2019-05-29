@@ -31,7 +31,7 @@ public class WordReviewController {
     }
 
     /**
-     * 处理复习过程正确词汇，weight++
+     * 处理复习过程正确词汇，weight++ 参数openId,wordId,
      * @param userWord
      * @return
      */
@@ -41,7 +41,7 @@ public class WordReviewController {
     }
 
     /**
-     * 处理复习过程错误词汇，weight--
+     * 处理复习过程错误词汇，weight-- 参数openId,wordId
      * @param userWord
      * @return
      */

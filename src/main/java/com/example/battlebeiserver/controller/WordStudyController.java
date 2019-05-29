@@ -35,7 +35,7 @@ public class WordStudyController {
     }
 
     /**
-     * 用户认识该词，当前用户进度++
+     * 用户认识该词，当前用户进度++ 参数openId,wordId
      * @param userWord
      * @return
      */
@@ -45,7 +45,7 @@ public class WordStudyController {
     }
 
     /**
-     * 处理学习过程中不认识的单词，更新进度，同时加入user_test、user_word表
+     * 处理学习过程中不认识的单词，更新进度，同时加入user_test、user_word表 参数openId,wordId
      * @param userWord
      * @return
      */
@@ -65,7 +65,7 @@ public class WordStudyController {
     }
 
     /**
-     * 处理用户学习过程中小测正确的单词
+     * 处理用户学习过程中小测正确的单词 参数openId,wordId
      * @param userWord
      * @return
      */
@@ -75,7 +75,7 @@ public class WordStudyController {
     }
 
     /**
-     * 处理用户学习过程中小测错误的单词
+     * 处理用户学习过程中小测错误的单词 参数openId,wordId
      * @param userWord
      * @return
      */

@@ -20,7 +20,7 @@ public class WordCollectionService {
     private UserWordCollectionDao userWordCollectionDao;
 
     /**
-     * 添加生词本
+     * 添加生词本,参数openId ,wordId
      * @param userWord
      * @return
      */
@@ -29,7 +29,7 @@ public class WordCollectionService {
     }
 
     /**
-     * 用户删除生词本某个单词
+     * 用户删除生词本某个单词 参数 openId ,wordId
      * @param userWord
      * @return
      */
@@ -38,11 +38,16 @@ public class WordCollectionService {
     }
 
     /**
-     * 获得用户生词本
+     * 获得用户生词本 参数openId
      * @param openId
      * @return
      */
     public ArrayList<Word> getUserWordCollection(String openId){
         return userWordCollectionDao.getUserWordCollection(openId);
     }
+
+    public boolean iswordinCollection(String openId,Long wordId){
+        return userWordCollectionDao.iswordinCollection(openId,wordId);
+    }
+
 }

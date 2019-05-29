@@ -45,4 +45,13 @@ public class UserWordCollectionDao {
     public ArrayList<Word> getUserWordCollection(String openId){
         return wordCollectionMapper.getUserWordCollection(openId);
     }
+
+    public boolean iswordinCollection(String openId,Long wordId){
+        Long temp=wordCollectionMapper.iswordinCollection(openId,wordId);
+        if(temp<=0){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

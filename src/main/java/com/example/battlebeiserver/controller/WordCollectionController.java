@@ -21,7 +21,7 @@ public class WordCollectionController {
 
 
     /**
-     * 添加生词本
+     * 添加生词本 参数openId ,wordId
      * @param userWord
      * @return
      */
@@ -31,7 +31,7 @@ public class WordCollectionController {
     }
 
     /**
-     * 用户删除生词本的某个词汇
+     * 用户删除生词本的某个词汇 参数openId ,wordId
      * @param userWord
      * @return
      */
@@ -41,12 +41,23 @@ public class WordCollectionController {
     }
 
     /**
-     * 获得用户生词本
+     * 获得用户生词本 参数openId
      * @param openId
      * @return
      */
     @GetMapping(value = "/userwordcollection")
     public ArrayList<Word>getUserWordCollection(@RequestParam(value = "openId")String openId){
         return wordCollectionService.getUserWordCollection(openId);
+    }
+
+    /**
+     * 判断词是否在生词本 参数 openId ,wordId
+     * @param openId
+     * @param wordId
+     * @return
+     */
+    @GetMapping(value = "/isinwordcollection")
+    public boolean isWordInCollection(@RequestParam(value = "openId")String openId,@RequestParam(value = "wordId")Long wordId){
+        return wordCollectionService.iswordinCollection(openId,wordId);
     }
 }

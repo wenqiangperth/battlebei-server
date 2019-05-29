@@ -42,9 +42,24 @@ public interface WordCollectionMapper {
     public ArrayList<Word>getUserWordCollection(@Param(value = "openId")String openId);
 
 
+    /**
+     * 获得用户battle所需生词
+     * @param openId
+     * @param battleNum
+     * @return
+     */
     @Select("select w.id,w.word from word w,user_word_collection uwc where uwc.open_id=#{openId} " +
             "and uwc.word_id=w.id and uwc.id>=(select floor(rand()*((select max(id) from user_word_collection)" +
             "-(select min(id) from user_word_collection))+(select min(id) from user_word_collection)))" +
             "order by uwc.id limit #{battleNum}")
     public ArrayList<Word>getUserWordCollectionForBattle(@Param(value = "openId")String openId,@Param(value = "battleNum")Long battleNum);
+
+    /**
+     * 判断该词是否在collection表
+     * @param openId
+     * @param wordId
+     * @return
+     */
+    @Select("select id from user_word_collection where open_id=#{openId} and word_id=#{wordId}")
+    public Long iswordinCollection(@Param(value = "openId")String openId,@Param(value = "word_id")Long wordId);
 }
