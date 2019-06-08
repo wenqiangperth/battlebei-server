@@ -69,7 +69,7 @@ public interface UserWordMapper {
      * @param openId
      * @return
      */
-    @Select("select count(word_id) from user_word where open_id=#{open_id}")
+    @Select("select count(word_id) from user_word where open_id=#{openId}")
     public Long getUserWordNum(@Param(value = "openId")String openId);
 
 }

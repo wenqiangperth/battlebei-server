@@ -48,7 +48,7 @@ public class UserWordCollectionDao {
 
     public boolean iswordinCollection(String openId,Long wordId){
         Long temp=wordCollectionMapper.iswordinCollection(openId,wordId);
-        if(temp<=0){
+        if(temp==null){
             return false;
         }else{
             return true;

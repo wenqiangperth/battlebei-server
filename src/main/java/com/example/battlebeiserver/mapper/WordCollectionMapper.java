@@ -61,5 +61,5 @@ public interface WordCollectionMapper {
      * @return
      */
     @Select("select id from user_word_collection where open_id=#{openId} and word_id=#{wordId}")
-    public Long iswordinCollection(@Param(value = "openId")String openId,@Param(value = "word_id")Long wordId);
+    public Long iswordinCollection(@Param(value = "openId")String openId,@Param(value = "wordId")Long wordId);
 }

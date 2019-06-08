@@ -71,6 +71,9 @@ public class WordPlanService {
      */
     public UserStudyStatus getUserStudyStatus(String openId){
         UserStudyStatus userStudyStatus=userStatusDao.getUserTodayStudyNumAndReviewNum(openId);
+        if(userStudyStatus==null){
+            userStudyStatus=new UserStudyStatus();
+        }
         WordPlan wordPlan=wordPlanDao.getNowWordPlan(openId);
         userStudyStatus.setDailyNum(wordPlan.getDailyNum().intValue());
         userStudyStatus.setOpenId(openId);

@@ -40,4 +40,7 @@ public class Constant {
      * battle时，正确个数处以这个数为得分
      */
     public static final Long BATTLEGRADENUM=10L;
+
+    public static final String APPID="wx6ff8447bf769d756";
+    public static final String APPSECRET="01db2adff6b88db277e2885d00c9aceb";
 }
